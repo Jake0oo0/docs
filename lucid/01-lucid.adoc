@@ -447,6 +447,18 @@ post.fill({body: 'Adding some new content'})
 yield post.save() // SQL Update
 ----
 
+Instead of overriding the existing attributes, the `merge` method may be used to only change specific values.
+
+[source, javascript]
+```
+const post = yield Post.findBy('id', 1)
+post.fill({title: 'A Blog Post', body: 'Adding some new content'})
+
+post.merge({title: 'Cool Blog Post'}) // Only changes 'title' attribute
+
+yield post.save()
+```
+
 ==== delete
 Delete operation is also performed on an existing model instance. If you have turned on xref:_deletetimestamp[softDeletes], then rows will not be deleted from SQL. However, the model instance will be considered deleted.
 
